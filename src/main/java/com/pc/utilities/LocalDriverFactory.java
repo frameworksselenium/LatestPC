@@ -37,8 +37,8 @@ public class LocalDriverFactory {
 	private static LocalDriverFactory instance = new LocalDriverFactory();
 
 	public static LocalDriverFactory getInstance() {
-		System.out.println("gng to return:::");
-		System.out.println("instance is:::");
+		//System.out.println("gng to return:::");
+		//System.out.println("instance is:::");
 		return instance;
 	}
 

@@ -12,7 +12,7 @@ public class TestNGRunner {
 
 	public static void main(String args[]) {
 
-		System.out.println("test........");
+		//System.out.println("Execution Started........");
 		XmlSuite suite = new XmlSuite();
 
 		suite.setName("TestAll");
@@ -32,6 +32,6 @@ public class TestNGRunner {
 		TestNG tng = new TestNG();
 		tng.setXmlSuites(suites);
 		tng.run();
-
+        //System.out.println("Execution Ended........");
 	}
 }

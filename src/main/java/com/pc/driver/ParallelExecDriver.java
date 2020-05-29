@@ -34,7 +34,6 @@ import com.pc.utilities.XlsxReader;
 public class ParallelExecDriver {
 	
 	static Logger log = Logger.getLogger(ParallelExecDriver.class);
-	// private String baseUrls;
 	private static ConcurrentLinkedQueue<String> testCaseIDorGroup = new ConcurrentLinkedQueue<String>();
 	static int i;
 	public static BufferedWriter writer;
@@ -56,25 +55,11 @@ public class ParallelExecDriver {
 	public String noOfExecutions;
 
 
-	/**
-	 * @function This method will take all the TCID into the queue will run one
-	 *           after one
-	 * @throws Exception
-	 */
 	@BeforeSuite
 	public void loadConfig() throws Exception {
-
 		//PropertyConfigurator.configure("log4j.properties");
-
 	}
 
-	/**
-	 * @function This method use to run the test case parllel according to the
-	 *           thread through TestNG
-	 * @param DataSheetName
-	 * @param Region
-	 * @throws Exception
-	 */
 	@Parameters({ "DataSheetName", "Region" })
 	@Test(priority = 1, enabled = true)
 	public void Parllel1(String DataSheetName, String Region) throws Exception {
@@ -92,37 +77,30 @@ public class ParallelExecDriver {
 		boolean status = false;
 		FlatFile ff = FlatFile.getInstance();
 		ff.CreateCSVFile();
-		System.out.println("Writer in Parallel1 is :::" + writer);
+		//System.out.println("Writer in Parallel1 is :::" + writer);
 		HTML.fnSummaryInitialization("Execution Summary Report");
 		String sFileName = HTML.properties.getProperty("DataSheetName");
 		String[] Excelbooks = sFileName.split(",");
-		
-		
+
 		for (i = 0; i < Excelbooks.length; i++) {
 			status = XlsxReader.getInstance(Excelbooks[i]).addTestCasesFromDataSheetName(testCaseIDorGroup);
-
 			if (HTML.properties.getProperty("DataBaseUpdate").equalsIgnoreCase("YES")) {
-
 				ReportUtil.loadTestCases();
 			}
-
 			if (!status) {
 				log.info("None of the testcase selected as 'YES' to execute");
 				System.exit(0);
 			}
-
 			boolean isExitLoop = false;
-
 			int nThreads = Integer.parseInt((String) HTML.properties.getProperty("THREAD_COUNT"));
 			log.info("Total Number of Threads = " + HTML.properties.getProperty("THREAD_COUNT"));
 			ExecutorService multiThreadExecutor = Executors.newFixedThreadPool(nThreads);
-			ExecutorService multiThreadExecutorforFailCases = Executors
-					.newFixedThreadPool(nThreads);
+			ExecutorService multiThreadExecutorforFailCases = Executors.newFixedThreadPool(nThreads);
 			String testCaseName = null;
 			noOfExecutions = HTML.properties.getProperty("NumberOfFailureCasesExecution");
-			System.out.println("noOfExecutions are :::"+noOfExecutions);
+			//System.out.println("noOfExecutions are :::"+noOfExecutions);
 			NumberOfFailureCasesExecution = Integer.parseInt(noOfExecutions);
-			System.out.println("NumberOfFailureCasesExecution are :::"+NumberOfFailureCasesExecution);
+			//System.out.println("NumberOfFailureCasesExecution are :::"+NumberOfFailureCasesExecution);
 			try {
 				testCaseName = testCaseIDorGroup.remove();
 
@@ -133,12 +111,8 @@ public class ParallelExecDriver {
 				isExitLoop = true;
 			}
 			while (!isExitLoop) {
-				
-				
-
-				log.info("Running test case in Prallel4 = " + testCaseName);
+				//log.info("Running test case in Prallel4 = " + testCaseName);
 				if (!multiThreadExecutor.isTerminated()) {
-					
 					parallelExecutor = new ParallelExecutor("RunModeNo",
 							testCaseName, Excelbooks[i], Region);
 					multiThreadExecutor.submit(parallelExecutor);
@@ -154,38 +128,31 @@ public class ParallelExecDriver {
 					nooffailcasesinfirstrun = nooffailcasesinfirstrun+failureGroup.size();
 					multiThreadExecutorforFailCases = Executors
 							.newFixedThreadPool(nThreads);
-					System.out.println("multiThreadExecutorforFailCases are:::"+multiThreadExecutorforFailCases);
-					System.out.println("NumberOfFailureCasesExecution are:::"+NumberOfFailureCasesExecution);
+					//System.out.println("multiThreadExecutorforFailCases are:::"+multiThreadExecutorforFailCases);
+					//System.out.println("NumberOfFailureCasesExecution are:::"+NumberOfFailureCasesExecution);
 					log.info("size of failure group is:::"+failureGroup.size());
 					if(count==1)
 					{
-						
 						 Date d= new Date();
 						 g_tSummaryReStart_Time = d;
 					}
 					NumberOfFailureCasesExecution--;
 					for(int fg=0;fg<failureGroup.size();fg++)
 					{
-					
 						log.info("size of failure group is:::"+failureGroup.size());
 						testCaseName = failureGroup.get(fg);
-						System.out.println("testcase name is:::"+testCaseName);
+						//System.out.println("testcase name is:::"+testCaseName);
 						parallelExecutor = new ParallelExecutor("RunModeNo",
 								testCaseName, Excelbooks[i], Region);
 						multiThreadExecutorforFailCases
 								.submit(parallelExecutor);
-
 					}
 					multiThreadExecutorforFailCases.shutdown();
 					multiThreadExecutorforFailCases.awaitTermination(24, TimeUnit.HOURS);
-					
-					
-					
 				}
 				 else {
 						isExitLoop = true;
 					}
-
 			/*
 				log.info("Running test case in Prallel4 = " + testCaseName);
 				ParallelExecutor parallelExecutor = new ParallelExecutor("RunModeNo", testCaseName, Excelbooks[i], Region);
@@ -201,25 +168,17 @@ public class ParallelExecDriver {
 			*/}
 			multiThreadExecutor.shutdown();
 			multiThreadExecutor.awaitTermination(24, TimeUnit.HOURS);
-
 		}
-
 		log.info("Executed All Test Cases");
 		//ReportUtilityDAO reportUtilDao = new ReportUtilityDAO();
 		//reportUtilDao.updateTotalExecutionStatus();
-
 	}
 
-	/**
-	 * @function This function is to exit the connection of the browser
-	 */
 	@AfterSuite
 	public void exitConfig() {
-
 		try {
 			XlsxReader.getInstance().closeConnections();
 			if (HTML.properties.getProperty("EXECUTIONAPP").equals("ODS") && FlatFile.getInstance().flatFileClose() != null) {
-
 				FlatFile.getInstance().flatFileClose();
 			}
 			HTML.fnSummaryCloseHtml(HTML.properties.getProperty("Release"));
@@ -227,6 +186,6 @@ public class ParallelExecDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Inside AfterSuite");
+		//System.out.println("Inside AfterSuite");
 	}
 }

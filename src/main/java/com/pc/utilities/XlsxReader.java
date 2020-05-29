@@ -290,19 +290,19 @@ public class XlsxReader {
 		if (isSheetExist(sheetName)) {
 			Sheet = workbook.getSheet(sheetName);// workbook.getSheetAt(iIndex);
 
-			System.out.println("yes" + Sheet.getLastRowNum());
+			//System.out.println("yes" + Sheet.getLastRowNum());
 
 			for (int i = rowPadding; i <= Sheet.getLastRowNum(); i++) {
 				row = Sheet.getRow(i);
 				if (row.getCell(columnPadding).getStringCellValue().trim().isEmpty())
 
 					break;
-				System.out.println(row.getCell(columnPadding).getStringCellValue());
+				//System.out.println(row.getCell(columnPadding).getStringCellValue());
 				number++;
 			}
 
 		}
-		System.out.println(number);
+		//System.out.println(number);
 		return number + rowPadding;
 
 	}

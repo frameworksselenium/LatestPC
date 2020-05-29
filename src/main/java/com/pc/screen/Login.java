@@ -28,7 +28,7 @@ public class Login {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd_MM_yyyy");
 		String date = dateFormat.format(d);
 		if (!s) {
-			logger.info("Application not Loggedin Successfully");
+			logger.info("Thread ID = " + Thread.currentThread().getId() + "Application not Loggedin Successfully");
 			HTML.fnInsertResult(PCThreadCache.getInstance().getProperty("testcasename"), PCThreadCache.getInstance().getProperty("methodName"), "Application should login successfully", "Application not loggedin successfully", "PASS");
 			return false;
 		}
@@ -52,12 +52,12 @@ Thread.currentThread().getId());
 			return status;
 		}
 		if (common.WaitUntilClickable(Common.o.getObject("eleDeskTopAction"), Integer.valueOf(HTML.properties.getProperty("VERYLONGWAIT")))) {
-			logger.info("Application Loggedin Successfully");
+			logger.info("Thread ID = " + Thread.currentThread().getId() + " Application Loggedin Successfully");
 			HTML.fnInsertResult(PCThreadCache.getInstance().getProperty("testcasename"), PCThreadCache.getInstance().getProperty("methodName"), "Application should login successfully", "Application loggedin successfully", "PASS");
 			//status = SCRCommon.funGetUserLoggedName();
 			status = true;
 		} else {
-			logger.info("Application not Loggedin Successfully");
+			logger.info("Thread ID = " + Thread.currentThread().getId() + " Application not Loggedin Successfully");
 			HTML.fnInsertResult(PCThreadCache.getInstance().getProperty("testcasename"), PCThreadCache.getInstance().getProperty("methodName"), "Application should login successfully", "Application not loggedin successfully", "FAIL");
 			status = false;
 		}

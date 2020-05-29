@@ -45,7 +45,7 @@ public class ParallelExecutor implements Runnable {
 	public void run() {
 		List<String> acList = new ArrayList<String>();
 		File f= new File("C:/Selenium/WorkSpace/LatestPC/Reports/Log/"+strTestCaseName+".log");
-		System.out.println("f is in parallelexecutor is:::"+f);
+		//System.out.println("f is in parallelexecutor is:::"+f);
 		if(f.exists()){
 			f.delete();
 			try {
@@ -54,15 +54,14 @@ public class ParallelExecutor implements Runnable {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("In run:::");
+		//System.out.println("In run:::");
 		 log = LoggerClass.getThreadLogger("Thread" + Thread.currentThread().getName(),strTestCaseName);
 
-		log.info("Starting Thread Id =" + Thread.currentThread().getId() + "Executing testcase = " + strTestCaseName);
+		log.info("Starting Thread Id =" + Thread.currentThread().getId() + " Executing testcase = " + strTestCaseName);
 		// added E2E Framework integration start
 		boolean isTestCasePass = false;
 		E2ETestCaseUtil e2eTestCaseUtil = null;
 		if (strTestCaseName != null && strTestCaseName.length() > 0 && strTestCaseName.contains("|")) {
-
 			isE2EExecution = true;
 			e2eTestCaseUtil = new E2ETestCaseUtil();
 			strTestCaseName = e2eTestCaseUtil.e2eInitE2ETestCaseExecution(strTestCaseName);
@@ -71,17 +70,17 @@ public class ParallelExecutor implements Runnable {
 
 		WebDriver driver = null;
 		String execMode = HTML.properties.getProperty("EXECUTIONMODE");
-		System.out.println("execMode is :::"+execMode);
+		//System.out.println("execMode is :::"+execMode);
 		if (HTML.properties.getProperty("TypeOfAutomation").equalsIgnoreCase("HEADLESS")) {
-			System.out.println("execMode is  in if:::"+execMode);
+			//System.out.println("execMode is  in if:::"+execMode);
 			PhantomJSDriverService service = PhantomJSDriverFactory.getInstance().createPhantomJSDriver();
 			ManagerPhantomJS.getInstance().setPhantomJSDriverService(service);
 		}
 		if (execMode.equalsIgnoreCase(PCConstants.executionModeLocal)) {
-			System.out.println("::::");
+			//System.out.println("::::");
 			driver = LocalDriverFactory.getInstance().createNewDriver();
 		} else {
-			System.out.println("execMode is in else :::"+execMode);
+			//System.out.println("execMode is in else :::"+execMode);
 			driver = RemoteDriverFactory.getInstance().createNewDriver();
 		}
 		Common common = new Common();
@@ -91,11 +90,11 @@ public class ParallelExecutor implements Runnable {
 		ThreadCacheManager tm = new ThreadCacheManager();
         //ThreadCacheManager tm =  ThreadCache.getInstance();
         ThreadCache.getInstance().setThreadCacheManager(tm);
-		log.info("Thread ID = " + Thread.currentThread().getId() + " common = " + common);
+		//log.info("Thread ID = " + Thread.currentThread().getId() + " common = " + common);
 		try {
-			System.out.println("iT IS IN isTestCasePass");
+			//System.out.println("iT IS IN isTestCasePass");
 			isTestCasePass = common.RunTest("RunModeNo", strTestCaseName, workbook, region);
-			System.out.println("iT IS IN isTestCasePass:::" + isTestCasePass);
+			//System.out.println("iT IS IN isTestCasePass:::" + isTestCasePass);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -108,10 +108,10 @@ public class Common {
 	public static BufferedWriter getFile() {
 		
 		if (HTML.properties.getProperty("E2E").equalsIgnoreCase("YES")) {
-			System.out.println("It is in E2E cases:");
+			//System.out.println("It is in E2E cases:");
 			writer = Driver.writer;
 		} else {
-			System.out.println("It is in Reg cases:");
+			//System.out.println("It is in Reg cases:");
 			writer = ParallelExecDriver.writer;
 		}
 		return writer;
@@ -564,18 +564,18 @@ public class Common {
 	public Boolean OpenApp() throws Exception {
 		Boolean bStatus = false;
 		String sURL = null;
-		logger.info("Browser Opened Successfully");
+		logger.info("Thread ID = " + Thread.currentThread().getId() + " Browser Opened Successfully");
 		sURL = HTML.properties.getProperty(HTML.properties.getProperty("Region"));
-		logger.info("Execution starting in '" + HTML.properties.getProperty("Region").toUpperCase() + "' environment");
+		logger.info("Thread ID = " + Thread.currentThread().getId() + " Execution starting in '" + HTML.properties.getProperty("Region").toUpperCase() + "' environment");
 		if (HTML.properties.getProperty("EXECUTIONMODE").equalsIgnoreCase("Remote")) {
 			String sMachineAddress = RemoteDriverFactory.getInstance().hostname;
 			HTML.fnInsertResult(PCThreadCache.getInstance().getProperty("testcasename"), PCThreadCache.getInstance().getProperty("methodName"), "Machine IP Address = " + sMachineAddress + "", "Machine IP Address = " + sMachineAddress + "", "PASS");
 		}
 		HTML.fnInsertResult(PCThreadCache.getInstance().getProperty("testcasename"), PCThreadCache.getInstance().getProperty("methodName"), "Execution should start in '" + HTML.properties.getProperty("Region").toUpperCase() + "' environment", "Execution started in '" + HTML.properties.getProperty("Region").toUpperCase() + "' environment", "PASS");
-		logger.info("Thread = " + Thread.currentThread().getId() + " Driver = " + ManagerDriver.getInstance().getWebDriver());
+		logger.info("Thread ID = " + Thread.currentThread().getId() + " Driver = " + ManagerDriver.getInstance().getWebDriver());
 		ManagerDriver.getInstance().getWebDriver().manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
 		if (HTML.properties.getProperty("Browser").equalsIgnoreCase("CH") && HTML.properties.getProperty("TypeOfAutomation").equalsIgnoreCase("HEAD")) {
-			logger.info("Browser maximized");
+			logger.info("Thread ID = " + Thread.currentThread().getId() + " Browser maximized");
 			bStatus = true;
 			// ManagerDriver.getInstance().getWebDriver().manage().window().maximize();
 			if (HTML.properties.getProperty("RemoteType").equalsIgnoreCase("Dockers")) {
@@ -583,11 +583,11 @@ public class Common {
 			}
 		} else {
 			ManagerDriver.getInstance().getWebDriver().manage().window().maximize();
-			logger.info("Browser Maximized");
+			logger.info("Thread ID = " + Thread.currentThread().getId() + " Browser Maximized");
 			bStatus = true;
 		}
 		ManagerDriver.getInstance().getWebDriver().get(sURL);
-		logger.info("Execution starting in '" + HTML.properties.getProperty("Region").toUpperCase() + "' environment and url '" + sURL + "'");
+		logger.info("Thread ID = " + Thread.currentThread().getId() + " Execution starting in '" + HTML.properties.getProperty("Region").toUpperCase() + "' environment and url '" + sURL + "'");
 		Integer x = Integer.valueOf(HTML.properties.getProperty("VERYLONGWAIT"));
 		// if(CommonManager.getInstance().getCommon().WaitUntilClickable(o.getObject("edtUserName"),
 		// x))
@@ -822,7 +822,7 @@ public class Common {
 			logger.info("phantomjs service stoped");
 		} else {
 			ManagerDriver.getInstance().getWebDriver().quit();
-			logger.info("WebDriver Quit");
+			logger.info("Thread ID = " + Thread.currentThread().getId() + " WebDriver Quit");
 		}
 		ScreenVideoCapture.stopVideoCapture(HTML.properties.getProperty("testcasename"));
 	}
@@ -978,7 +978,7 @@ public class Common {
         if (value.contains((PCConstants.Cacheaccountnumber)) || (value.contains(PCConstants.CachePOLICYNUMBER)) || (value.contains(PCConstants.CacheSUBMISSIONNUMBER))|| (value.contains(PCConstants.CacheAthorityCPID))|| (value.contains(PCConstants.CacheAffGroupName))|| (value.contains(PCConstants.CacheCommertialProgramName)))
         {
                String[] col; 
-               System.out.println("value is :::"+value);
+               //System.out.println("value is :::"+value);
                
                if(value.contains(":::")){
                      col = value.split(":::");  
@@ -995,11 +995,11 @@ public class Common {
                             flag = flag + ":::" + col[var];
                      }
                      String colnamee[] = col[0].split(" ");
-                     System.out.println("col[0] is :::"+col[0]);
-                     System.out.println("colnamee[0] is :::"+colnamee[0]);
-                     System.out.println("colnamee[1] is :::"+colnamee[1]);
+                     //System.out.println("col[0] is :::"+col[0]);
+                     //System.out.println("colnamee[0] is :::"+colnamee[0]);
+                     //System.out.println("colnamee[1] is :::"+colnamee[1]);
                      value = PCThreadCache.getInstance().getProperty(colnamee[1]);
-                     System.out.println("Value is:::"+value);
+                     //System.out.println("Value is:::"+value);
                      
                      value = value + flag;
                      
@@ -1569,13 +1569,13 @@ public class Common {
 	public boolean RunTest1(String strRunMode, String strTestCaseName, String DataSheetName, String Region) throws Exception {
 		// System.out.println("RunTest Started = " +
 		// Thread.currentThread().getId());
-		logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
+		//logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
 		// fixed for test case status
 		PCThreadCache.getInstance().resetProperties();
 		// fixed for test case status
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat();
-		System.out.println("Start Time--------------------------------------------" + d);
+		//System.out.println("Start Time--------------------------------------------" + d);
 		// PropertyConfigurator.configure("log4j.properties");
 		// HTML.fnSummaryInitialization("Execution Summary Report");
 		// logger.info("-----------------STARTED RUNNING TESTNG
@@ -1683,13 +1683,13 @@ public class Common {
 				}
 				if (ScriptLevelStatus) {
 					logger.info("Thread ID = " + Thread.currentThread().getId() + " -----------------ENDED RUNNING TEST CASE " + testcasename + " EXECUTION-----------------");
-					logger.info("'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
+					logger.info("Thread ID = " + Thread.currentThread().getId() + " 'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
 					HTML.fnSummaryInsertTestCase();
 					CommonManager.getInstance().getCommon().Terminate();
 					isTestCasePass = true;
 				} else {
 					logger.info("Thread ID = " + Thread.currentThread().getId() + " ---------------Error in executing " + methodName + " function---------------");
-					logger.info("'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
+					logger.info("Thread ID = " + Thread.currentThread().getId() + " 'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
 					HTML.fnInsertResult(testcasename, methodName, "Component should run properly", "Error in executing: '" + methodName + "'", "FAIL");
 					HTML.fnSummaryInsertTestCase();
 					status = handleUnknownAlert();
@@ -1712,7 +1712,7 @@ public class Common {
 			}
 		}
 		Date dd = new Date();
-		System.out.println("End Time--------------------------------------------" + dd);
+		//System.out.println("End Time--------------------------------------------" + dd);
 		return isTestCasePass;
 	}
 
@@ -1727,13 +1727,13 @@ public class Common {
 	public boolean RunTest_multipletest(String strRunMode, String strTestCaseName, String DataSheetName, String Region) throws Exception {
 		// System.out.println("RunTest Started = " +
 		// Thread.currentThread().getId());
-		logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
+		//logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
 		// fixed for test case status
 		PCThreadCache.getInstance().resetProperties();
 		// fixed for test case status
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat();
-		System.out.println("Start Time--------------------------------------------" + d);
+		//System.out.println("Start Time--------------------------------------------" + d);
 		boolean isTestCasePass = false;
 		// boolean strYES = true;
 		Boolean status = true;
@@ -1859,13 +1859,13 @@ public class Common {
 				}
 				if (ScriptLevelStatus) {
 					logger.info("Thread ID = " + Thread.currentThread().getId() + " -----------------ENDED RUNNING TEST CASE " + testcasename + " EXECUTION-----------------");
-					logger.info("'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
+					logger.info("Thread ID = " + Thread.currentThread().getId() +  " 'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
 					HTML.fnSummaryInsertTestCase();
 					CommonManager.getInstance().getCommon().Terminate();
 					isTestCasePass = true;
 				} else {
 					logger.info("Thread ID = " + Thread.currentThread().getId() + " ---------------Error in executing " + methodName + " function---------------");
-					logger.info("'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
+					logger.info("Thread ID = " + Thread.currentThread().getId() +  " 'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
 					HTML.fnInsertResult(testcasename, methodName, "Component should run properly", "Error in executing: '" + methodName + "'", "FAIL");
 					HTML.fnSummaryInsertTestCase();
 					status = handleUnknownAlert();
@@ -1888,7 +1888,7 @@ public class Common {
 			}
 		}
 		Date dd = new Date();
-		System.out.println("End Time--------------------------------------------" + dd);
+		//System.out.println("End Time--------------------------------------------" + dd);
 		return isTestCasePass;
 	}
 
@@ -1912,15 +1912,15 @@ public class Common {
 		actualandexpected=0;
 		logger = LoggerClass.getThreadLogger("Thread" + Thread.currentThread().getName(),strTestCaseName);
 		BufferedWriter writer = getFile();
-		System.out.println("writer in getFile is ::" + writer);
+		//System.out.println("writer in getFile is ::" + writer);
 		// E2E Framework integration end
 		{
 
-			logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
+			//logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
 			// PCThreadCache.getInstance().resetProperties();
 			Date d = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-			System.out.println("Start Time--------------------------------------------" + d);
+			//System.out.println("Start Time--------------------------------------------" + d);
 			// PropertyConfigurator.configure("log4j.properties");
 			// HTML.fnSummaryInitialization("Execution Summary Report");
 			// logger.info("-----------------STARTED RUNNING TESTNG
@@ -1980,20 +1980,20 @@ public class Common {
 					// System.out.println("testcasetype before inprogress is :::"+testCaseType);
 					// System.out.println("testCaseType.length() before inprogress is
 					// :::"+testCaseType);
-					logger.info("Regression :::: " + testCaseType + " ::::   " + HTML.properties.getProperty("DataBaseUpdate"));
+					//logger.info("Regression :::: " + testCaseType + " ::::   " + HTML.properties.getProperty("DataBaseUpdate"));
 					if (testCaseType != null && testCaseType.length() > 0 && "Regression".equalsIgnoreCase(testCaseType) && HTML.properties.getProperty("DataBaseUpdate").equalsIgnoreCase("YES")) {
-						logger.info("Regression :::: going to update IN_PROGRESS ");
+						//logger.info("Regression :::: going to update IN_PROGRESS ");
 						ReportUtil.initBeginExecuction();
 						ReportUtil.updateDataFeed("IN_PROGRESS");
 					}
 					int colcount = sXL.getColumnCount(sheetname);
-					System.out.println("colcount is ::::" + colcount);
+					//System.out.println("colcount is ::::" + colcount);
 					for (int j = 2; j <= colcount; j++) {
 						try {
 							String ColName = sXL.getCellData(sheetname, j, 1);
 
 							if (ColName.contains("Component")) {
-								System.out.println("colname contains component");
+								//System.out.println("colname contains component");
 								TCRow = i;
 								methodName = sXL.getCellData(sheetname, j, i);
 								// HTML.properties.setProperty("methodName",methodName);
@@ -2088,16 +2088,16 @@ public class Common {
 						}
 					}
 					if (ScriptLevelStatus) {
-						System.out.println("ScriptLevelStatus is :::" + ScriptLevelStatus);
+						//System.out.println("ScriptLevelStatus is :::" + ScriptLevelStatus);
 						logger.info("Thread ID = " + Thread.currentThread().getId() + " -----------------ENDED RUNNING TEST CASE " + testcasename + " EXECUTION-----------------");
-						logger.info("'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
+						logger.info("Thread ID = " + Thread.currentThread().getId() + " 'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
 						HTML.fnSummaryInsertTestCase();
 						CommonManager.getInstance().getCommon().Terminate();
 						isTestCasePass = true;
 					} else {
 						// System.out.println("iT IS IN SCRIPTLEVEL STATUS ELSE PART");
 						logger.info("Thread ID = " + Thread.currentThread().getId() + " ---------------Error in executing " + methodName + " function---------------");
-						logger.info("'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
+						logger.info("Thread ID = " + Thread.currentThread().getId() + " 'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
 						HTML.fnInsertResult(testcasename, methodName, "Component should run properly", "Error in executing: '" + methodName + "'", "FAIL");
 						//sXL.failuresReader("Component should run properly", "Error in executing: '" + PCThreadCache.getInstance().getProperty("methodName") + "'", "", "", "", writer);
 						HTML.fnSummaryInsertTestCase();
@@ -2136,7 +2136,7 @@ public class Common {
 				}
 			}
 			Date dd = new Date();
-			System.out.println("End Time--------------------------------------------" + dd);
+			//System.out.println("End Time--------------------------------------------" + dd);
 			// E2E Framework integration start
 			PCThreadCache.getInstance().resetProperties();
 
@@ -2165,11 +2165,11 @@ public class Common {
 	{
 		// System.out.println("RunTest Started = " +
 		// Thread.currentThread().getId());
-		logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
+		//logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
 		PCThreadCache.getInstance().resetProperties();
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat();
-		System.out.println("Start Time--------------------------------------------" + d);
+		//System.out.println("Start Time--------------------------------------------" + d);
 		// PropertyConfigurator.configure("log4j.properties");
 		// HTML.fnSummaryInitialization("Execution Summary Report");
 		// logger.info("-----------------STARTED RUNNING TESTNG
@@ -2279,7 +2279,7 @@ public class Common {
 				}
 				if (ScriptLevelStatus) {
 					logger.info("Thread ID = " + Thread.currentThread().getId() + " -----------------ENDED RUNNING TEST CASE " + testcasename + " EXECUTION-----------------");
-					logger.info("'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
+					logger.info("Thread ID = " + Thread.currentThread().getId() +  " 'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
 					HTML.fnSummaryInsertTestCase();
 					CommonManager.getInstance().getCommon().Terminate();
 					isTestCasePass = true;
@@ -2306,7 +2306,7 @@ public class Common {
 		 * ReportUtil.finalizeExec("Fail"); ReportUtil.updateDataFeed("FAIL"); } }
 		 */
 		Date dd = new Date();
-		System.out.println("End Time--------------------------------------------" + dd);
+		//System.out.println("End Time--------------------------------------------" + dd);
 		// E2E Framework integration start
 		return isTestCasePass;
 		// E2E Framework integration end
@@ -2323,13 +2323,13 @@ public class Common {
 	public boolean RunTest8_7(String strRunMode, String strTestCaseName, String DataSheetName, String Region) throws Exception {
 		// System.out.println("RunTest Started = " +
 		// Thread.currentThread().getId());
-		logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
+		//logger.debug("Thread ID = " + Thread.currentThread().getId() + " common = " + CommonManager.getInstance().getCommon() + " driver = " + ManagerDriver.getInstance().getWebDriver());
 		// fixed for test case status
 		PCThreadCache.getInstance().resetProperties();
 		// fixed for test case status
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat();
-		System.out.println("Start Time--------------------------------------------" + d);
+		//System.out.println("Start Time--------------------------------------------" + d);
 		boolean isTestCasePass = false;
 		// boolean strYES = true;
 		Boolean status = true;
@@ -2455,13 +2455,13 @@ public class Common {
 				}
 				if (ScriptLevelStatus) {
 					logger.info("Thread ID = " + Thread.currentThread().getId() + " -----------------ENDED RUNNING TEST CASE " + testcasename + " EXECUTION-----------------");
-					logger.info("'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
+					logger.info("Thread ID = " + Thread.currentThread().getId() + " 'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
 					HTML.fnSummaryInsertTestCase();
 					CommonManager.getInstance().getCommon().Terminate();
 					isTestCasePass = true;
 				} else {
 					logger.info("Thread ID = " + Thread.currentThread().getId() + " ---------------Error in executing " + methodName + " function---------------");
-					logger.info("'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
+					logger.info("Thread ID = " + Thread.currentThread().getId() + " 'TestCaseID:' " + TCID + " 'Component:' " + methodName + "");
 					HTML.fnInsertResult(testcasename, methodName, "Component should run properly", "Error in executing: '" + methodName + "'", "FAIL");
 					HTML.fnSummaryInsertTestCase();
 					status = handleUnknownAlert();
@@ -2484,7 +2484,7 @@ public class Common {
 			}
 		}
 		Date dd = new Date();
-		System.out.println("End Time--------------------------------------------" + dd);
+		//System.out.println("End Time--------------------------------------------" + dd);
 		return isTestCasePass;
 	}
 
@@ -3094,11 +3094,11 @@ public class Common {
 	public Boolean OpenApp_WEISS() throws Exception {
 		Boolean bStatus = false;
 		String sURL = null;
-		logger.info("Browser Opened Successfully");
+		logger.info("Thread ID = " + Thread.currentThread().getId() + "Browser Opened Successfully");
 		// sURL =
 		// HTML.properties.getProperty(HTML.properties.getProperty("WEISSRegion"));
 		sURL = HTML.properties.getProperty("WEISSRegion");
-		logger.info("Execution starting in '" + HTML.properties.getProperty("WEISSRegion").toUpperCase() + "' environment");
+		logger.info("Thread ID = " + Thread.currentThread().getId() + "Execution starting in '" + HTML.properties.getProperty("WEISSRegion").toUpperCase() + "' environment");
 		if (HTML.properties.getProperty("EXECUTIONMODE").equalsIgnoreCase("Remote")) {
 			String sMachineAddress = RemoteDriverFactory.getInstance().hostname;
 			HTML.fnInsertResult(PCThreadCache.getInstance().getProperty("testcasename"), PCThreadCache.getInstance().getProperty("methodName"), "Machine IP Address = " + sMachineAddress + "", "Machine IP Address = " + sMachineAddress + "", "PASS");
@@ -3108,16 +3108,16 @@ public class Common {
 		logger.info("Thread = " + Thread.currentThread().getId() + " Driver = " + ManagerDriver.getInstance().getWebDriver());
 		ManagerDriver.getInstance().getWebDriver().manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
 		if (HTML.properties.getProperty("Browser").equalsIgnoreCase("CH") && HTML.properties.getProperty("TypeOfAutomation").equalsIgnoreCase("HEAD")) {
-			logger.info("Browser maximized");
+			logger.info("Thread ID = " + Thread.currentThread().getId() + "Browser maximized");
 			bStatus = true;
 			// ManagerDriver.getInstance().getWebDriver().manage().window().maximize();
 		} else {
 			ManagerDriver.getInstance().getWebDriver().manage().window().maximize();
-			logger.info("Browser Maximized");
+			logger.info("Thread ID = " + Thread.currentThread().getId() + "Browser Maximized");
 			bStatus = true;
 		}
 		ManagerDriver.getInstance().getWebDriver().get(sURL);
-		logger.info("Execution starting in '" + HTML.properties.getProperty("WEISSRegion").toUpperCase() + "' environment and url '" + sURL + "'");
+		logger.info("Thread ID = " + Thread.currentThread().getId() + "Execution starting in '" + HTML.properties.getProperty("WEISSRegion").toUpperCase() + "' environment and url '" + sURL + "'");
 		Integer x = Integer.valueOf(HTML.properties.getProperty("VERYLONGWAIT"));
 		// if(CommonManager.getInstance().getCommon().WaitUntilClickable(o.getObject("edtUserName"),
 		// x))

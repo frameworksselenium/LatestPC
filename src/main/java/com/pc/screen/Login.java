@@ -54,7 +54,7 @@ Thread.currentThread().getId());
 		if (common.WaitUntilClickable(Common.o.getObject("eleDeskTopAction"), Integer.valueOf(HTML.properties.getProperty("VERYLONGWAIT")))) {
 			logger.info("Application Loggedin Successfully");
 			HTML.fnInsertResult(PCThreadCache.getInstance().getProperty("testcasename"), PCThreadCache.getInstance().getProperty("methodName"), "Application should login successfully", "Application loggedin successfully", "PASS");
-			status = SCRCommon.funGetUserLoggedName();
+			//status = SCRCommon.funGetUserLoggedName();
 			status = true;
 		} else {
 			logger.info("Application not Loggedin Successfully");

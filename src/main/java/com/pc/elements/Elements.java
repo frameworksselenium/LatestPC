@@ -92,22 +92,22 @@ public class Elements {
 		hm.put("eleNGSViewSubmission", By.xpath(".//*[contains(@id,'ViewJob-inputEl')]"));
 		hm.put("lstNGSRejectReason", By.xpath(".//*[contains(@id,'RejectReason-inputEl')]"));
 		// Universal login
-		hm.put("pwdUniversalUserName", By.name("USER"));
-		hm.put("pwdUniversalPassword", By.name("PASSWORD"));
-		hm.put("btnUniversalLogin", By.xpath("//input[@type = 'submit']"));
+		hm.put("pwdUniversalUserName", By.name("username"));
+		hm.put("pwdUniversalPassword", By.name("password"));
+		hm.put("btnUniversalLogin", By.xpath("login"));
 
 		// LogIn Objects
 		hm.put("edtUserName", By.id("username"));//By.id("Login:LoginScreen:LoginDV:username-inputEl"));
 		hm.put("eleUserName", By.id("password"));//By.id("Login:LoginScreen:LoginDV:username-inputEl"));
 		hm.put("pwdPassword", By.id("Login:LoginScreen:LoginDV:password-inputEl"));
 		hm.put("btnLogin", By.id("Login:LoginScreen:LoginDV:submit-btnInnerEl"));
-		hm.put("pwdUniversalUserName", By.name("USER"));
-		hm.put("eleUniversalUserName", By.name("USER"));
-		hm.put("pwdUniversalPassword", By.name("PASSWORD"));
+		//hm.put("pwdUniversalUserName", By.name("USER"));
+		//hm.put("eleUniversalUserName", By.name("USER"));
+		//hm.put("pwdUniversalPassword", By.name("PASSWORD"));
 		hm.put("btnUniversalLogin", By.id("login"));//;By.xpath("//input[@type = 'submit']"));
 
 		// Objects under Action Menu which is Under Desktop Main Menu
-		hm.put("eleDeskTopAction", By.id("Desktop:DesktopMenuActions-btnInnerEl"));
+		hm.put("eleDeskTopAction", By.id("Submit"));
 		hm.put("eleDeskTopNewAccount", By.id("Desktop:DesktopMenuActions:DesktopMenuActions_Create:DesktopMenuActions_NewAccount-textEl"));
 		hm.put("melDesktop", By.id("TabBar:DesktopTab-btnWrap"));
 		hm.put("eleUnattachedDocument", By.id("TabBar:DesktopTab:Desktop_DesktopUnattachedDocumentsPage-itemEl"));
@@ -216,7 +216,7 @@ public class Elements {
 		// hm.put("elePreferences", By.id(":TabLinkMenuButton-btnIconEl"));
 		hm.put("elePreferences", By.id(":TabLinkMenuButton-btnInnerEl"));
 		hm.put("eleLogOut", By.id("TabBar:LogoutTabBarLink-textEl"));
-		hm.put("btnLogOut", By.id("TabBar:LogoutTabBarLink-textEl"));
+		hm.put("btnLogOut", By.id("/html/body/table[2]/tbody/tr[1]/td[2]/a[4]"));
 		hm.put("eleBuildInfo", By.id("TabBar:buildInformationTabBarLink"));
 		hm.put("btnServerName", By.id("TabBar:buildInformationTabBarLink:BuildInfoMenu_Ext:BuildInfo_ExtMenuItemSet:serverIDMenuItem-textEl"));
 		// melAccount edtAccountNumbar eleAccountSearch
@@ -5665,7 +5665,7 @@ public class Elements {
 	{
 		logger = LoggerClass.getThreadLogger("Thread" + Thread
 				.currentThread().getName(),PCThreadCache.getInstance().getProperty("TCID"));
-		System.out.println("In Elements::::"+PCThreadCache.getInstance().getProperty("TCID"));
+		//System.out.println("In Elements::::"+PCThreadCache.getInstance().getProperty("TCID"));
 		By retuValue = null;
 		if (hm.containsKey(ff)) {
 			retuValue = hm.get(ff);

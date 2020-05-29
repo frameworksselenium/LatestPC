@@ -41,11 +41,10 @@ public class ParallelExecutor implements Runnable {
 		this.region = region;
 	}
 
-	@Override
+	//@Override
 	public void run() {
 		List<String> acList = new ArrayList<String>();
-		//File f= new File("C:/Selenium/Workspacelatestfortestcases/bi_compas_auto_ngs_pc/Reports/Log/"+strTestCaseName+".log");
-		File f= new File("C:/Selenium/Workspacelatestfortestcases/bi_compas_auto_ngs_pc/Reports/Log/"+strTestCaseName+".log");
+		File f= new File("C:/Selenium/WorkSpace/LatestPC/Reports/Log/"+strTestCaseName+".log");
 		System.out.println("f is in parallelexecutor is:::"+f);
 		if(f.exists()){
 			f.delete();
@@ -89,8 +88,8 @@ public class ParallelExecutor implements Runnable {
 		CommonManager.getInstance().setCommon(common);
 		ManagerDriver.getInstance().setWebDriver(driver);
 		
-		//ThreadCacheManager tm = new ThreadCacheManager();
-        ThreadCacheManager tm =  ThreadCache.getInstance();
+		ThreadCacheManager tm = new ThreadCacheManager();
+        //ThreadCacheManager tm =  ThreadCache.getInstance();
         ThreadCache.getInstance().setThreadCacheManager(tm);
 		log.info("Thread ID = " + Thread.currentThread().getId() + " common = " + common);
 		try {
